@@ -7,11 +7,11 @@ export function formateMessageTime (date){
 
 }
 
-// function fun() {
-//     console.log(Date.now());
-//     var v = Date();
-//     console.log(v);
+ function fun() {
+         console.log(Date.now());
+    var v = Date();
+    console.log(v);
     
     
-// }
-// console.log("lfjskjfjjfsjfksjdjksjdskd");
+}
+console.log("lfjskjfjjfsjfksjdjksjdskd");
