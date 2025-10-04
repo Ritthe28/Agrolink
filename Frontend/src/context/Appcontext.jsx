@@ -1,25 +1,39 @@
 
-import { Children, createContext } from "react";
+import { Children, createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 export const appcontext = createContext();
 
-const Appcontextprovider =({Children})=>{
+const Appcontextprovider =({children})=>{
+    const [isloggedin , setisloggedin]=useState(false);
     
-    let data = 76767676;
+const navigate = useNavigate();
+
+var data = 76;
 
     
     
     
     
     const value = {
-        data
+        data,navigate,isloggedin , setisloggedin
     }
     return <appcontext.Provider value={value}>
     {
-        Children
+        children
     }
-    </appcontext.Provider>
+     </appcontext.Provider>
 }
+
+ export const useappcontaxt =()=>{
+
+     
+     return  useContext(appcontext);
+
+}
+
+
+export default Appcontextprovider;
 
 

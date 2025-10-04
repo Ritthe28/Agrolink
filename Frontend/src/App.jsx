@@ -1,23 +1,22 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import  HomePage from "./pages/HomePage.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
-import ProfilePage from './pages/ProfilePage.jsx';
-import {ToastContainer} from "react-toastify"
-import { toast } from 'react-toastify';
-
-
+import { appcontext } from './context/Appcontext'
+import { useContext } from 'react'
+import Login_Page from './Components/Login_Page.jsx';
+import {Routes, Route} from "react-router-dom"
+import Home_Page from './pages/Home_Page.jsx';
 const App = () => {
-  return (
-    <div className="bg-[url('./src/assets/bgImage.svg')] bg-cover ">
-  
-      <Routes>
+  const {data } = useContext(appcontext);
 
-        <Route path='/' element={<HomePage/>}></Route>
-        <Route path='/login' element={<LoginPage/>}></Route>
-        <Route path='/profile' element={<ProfilePage/>}></Route>
-      </Routes>
-<ToastContainer/>
+  return (
+    <div>
+<Routes>
+  <Route path='/' element={<Home_Page/>}></Route>
+<Route path='/login' element={<Login_Page/>}></Route>
+
+
+</Routes>
+
+
     </div>
   )
 }
