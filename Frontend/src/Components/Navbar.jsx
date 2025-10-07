@@ -6,7 +6,7 @@ const Navbar = () => {
   const { navigate, isloggedin, setisloggedin } = useappcontaxt();
 
   return (
-    <div className="w-full h-[10vh] bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 shadow-lg flex items-center px-6">
+    <div className="w-full h-[10vh] bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 shadow-lg flex items-center px-6 fixed top-0 left-0 z-30">
       
       {/* Logo Section */}
       <div className="w-fit h-full flex items-center cursor-pointer" onClick={() => navigate("/")}>
@@ -34,7 +34,7 @@ const Navbar = () => {
             Services Offered
           </span>
 
-          <ul className="absolute left-0 mt-1 w-48 bg-white text-gray-800 shadow-lg rounded-lg overflow-hidden hidden group-hover:block">
+          <ul className="absolute left-0 mt-1 w-48 bg-white text-gray-800 shadow-lg rounded-lg overflow-hidden hidden group-hover:block z-50">
             <li className="px-4 py-2 hover:bg-orange-100 cursor-pointer">Soil Testing</li>
             <li className="px-4 py-2 hover:bg-orange-100 cursor-pointer">Crop Assessment</li>
             <li className="px-4 py-2 hover:bg-orange-100 cursor-pointer">Buy</li>
