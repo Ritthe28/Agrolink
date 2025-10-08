@@ -9,11 +9,29 @@ import sgsLogo from "./SGS.png";
 import oreyLogo from "./orey_xorey.png";
 import ccaLogo from "./CCA Law Firm_Logo.png";
 import mongopay from "./mangopay.png";
+import menu from "./menu.png"
 import Pricing from "./grain_bag.png";
 import transparencyIcon from "./transparency2.png";
 import fairtradeIcon from "./fairtrade.png";
 import userFriendlyIcon from "./userfriends.png";
 import foodTraceabilityIcon from "./food_traceability.png";
+import herobg from "./herosection.jpeg"
+import grainbg from "./grainimage.png"
+import grain from "./grain.png"
+import nuts from "./nuts.png"
+import coffee from "./coffee.png"
+import carbon from"./Carbonfootprint.png"
+import oil from "./oils.png"
+import rice from "./rice.png"
+import corn from "./corn.png"
+import barkle from "./barkley.png"
+import almond from "./almond.png"
+import walnut from "./wallnut.png"
+import pista from "./pista.png"
+import hazenut from  "./hazelnut.png"
+import pinenut from "./pinenut.png"
+import cashew from "./cashew.png"
+import refined from "./refined.png"
 
 const featureIcons = {
   transparency: transparencyIcon, 
@@ -23,6 +41,8 @@ const featureIcons = {
 };
 
 export const assets ={
+  menu,
+
     logo,
     googlePlay,
     appStore,
@@ -32,7 +52,8 @@ export const assets ={
     Services,
     Pricing
 
-
+,
+grainbg
     
 }
 
@@ -86,3 +107,108 @@ export const featuresData = [
     description: 'Crop reliability through supply chain traceability (coming soon)',
   },
 ];
+
+
+export const Market_Prodects = [
+{
+  name:"Grains",
+  image :grain,
+ },
+ {name:"Nuts",
+  image :nuts
+
+},
+{
+  name:"Coffee",
+  image :coffee
+},
+{
+      name:"Carbon Credits",
+  image :carbon
+
+}, 
+{
+
+      name:"Olive oil and other oil",
+  image :oil
+}
+]
+
+export const market_products_subproduct =[
+{
+  name:'Grains' ,
+  image :[
+{
+  image :rice,
+  name :"rice"
+}, {
+  image :barkle,
+  name :"Barkley"
+}, {
+  image :grain,
+  name :"grain"
+},{
+  image:corn,
+  name :"corn"
+}
+  ]
+
+},
+{
+  name :"Nuts",
+  image :[
+  
+    {
+      image :pinenut,
+      name :"pinut"
+    },{
+      image:hazenut,
+      name :"hazlenut"
+    },{
+      image :cashew,
+      name :"cashew"
+    }, {
+      image :almond,
+      name :"almond"
+    }, {
+      image :pista,
+      name :"pista"
+    },{
+      image :walnut,
+      name :"walnut"
+    }
+
+  
+    
+    
+  ]
+},{
+  name :"Coffee",
+  image :[
+{
+  image :coffee,
+  name :"coffe"
+}
+  ]
+},
+{
+  name:"Olive oil and other oil",
+  image :[
+  
+    {
+      image :oil,
+      name :"Regular Oil"
+    }, {
+      image :refined,
+      name :"Refined Oil"
+    }
+  ]
+}
+,{
+  name :"Carbon Credits"
+  , image :[
+ ]
+}
+
+
+]
