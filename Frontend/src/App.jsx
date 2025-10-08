@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import Login_Page from './Components/Login_Page.jsx';
 import {Routes, Route} from "react-router-dom"
 import Home_Page from './pages/Home_Page.jsx';
+import Market from './pages/Market.jsx';
 const App = () => {
   const {data } = useContext(appcontext);
 
@@ -12,6 +13,7 @@ const App = () => {
 <Routes>
   <Route path='/' element={<Home_Page/>}></Route>
 <Route path='/login' element={<Login_Page/>}></Route>
+<Route path='/market' element={<Market/>}></Route>
 
 
 </Routes>
