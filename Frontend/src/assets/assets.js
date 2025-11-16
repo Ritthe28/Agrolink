@@ -32,6 +32,7 @@ import hazenut from  "./hazelnut.png"
 import pinenut from "./pinenut.png"
 import cashew from "./cashew.png"
 import refined from "./refined.png"
+import upload_area from "./upload_Area.png"
 
 const featureIcons = {
   transparency: transparencyIcon, 
@@ -54,6 +55,8 @@ export const assets ={
 
 ,
 grainbg
+,
+upload_area
     
 }
 

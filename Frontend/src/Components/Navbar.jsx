@@ -6,129 +6,119 @@ const Navbar = () => {
   const [ismenu, setismenu] = useState(false);
   const { navigate, isloggedin, setisloggedin } = useappcontaxt();
 
+  const navItem = (label, path, action) => (
+    <span
+      onClick={() => { action ? action() : navigate(path) }}
+      className="relative cursor-pointer group"
+    >
+      {label}
+      <span className="absolute left-0 bottom-[-2px] w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+    </span>
+  );
+
   return (
-    <div className="w-full bg-white h-[10vh]  shadow-lg flex items-center relative px-6 top-0 left-0 z-30 text-black">
-      
-      {/* Logo Section */}
-      <div className="w-fit h-full flex items-center cursor-pointer" onClick={() => navigate("/")}>
-        <img 
-          src={assets.Agrologo} 
-          alt="AgroLink Logo" 
-          className="h-[80%] w-full object-cover rounded-md shadow-md"
-        />
+    <nav className="w-full bg-white h-[10vh] shadow-md flex items-center justify-between px-6 fixed top-0 z-40">
+
+      {/* LOGO */}
+      <div className="h-full flex items-center cursor-pointer" onClick={() => navigate("/")}>
+        <img src={assets.Agrologo} alt="Logo" className="h-[70%] rounded-md" />
       </div>
 
-      {/* Navbar Right Section (Desktop) */}
-      <div className="flex-1 flex flex-row justify-end items-center gap-10 text-black font-medium text-lg max-sm:hidden">
-        <span 
-          className="hover:text-orange-400 cursor-pointer transition-colors group"
-          onClick={() => navigate("/")}
-        >
-          <hr className='w-full h-1 bg-white outline-none border-0 group-hover:block group-hover:bg-orange-500 rounded-lg duration-200' />
-          Home
-        </span>
+      {/* DESKTOP MENU */}
+      <div className="hidden sm:flex items-center gap-8 font-medium text-gray-800 text-lg">
 
+        {navItem("Home", "/")}
+
+        {/* DROPDOWN */}
         <div className="relative group cursor-pointer">
-          <span className="hover:text-orange-400 transition-colors group">
-                      <hr className='w-full h-1 bg-white outline-none border-0 group-hover:block group-hover:bg-orange-500 rounded-lg duration-200' />
-
-            Crop Converter
-          </span>
-          <ul className="absolute left-0 mt-1 w-48 bg-white text-gray-800 shadow-lg rounded-lg overflow-hidden hidden group-hover:block z-50">
-            <li className="px-4 py-2 hover:bg-orange-100 cursor-pointer">Soil Testing</li>
-            <li className="px-4 py-2 hover:bg-orange-100 cursor-pointer">Crop Assessment</li>
-            <li className="px-4 py-2 hover:bg-orange-100 cursor-pointer">Buy</li>
-            <li className="px-4 py-2 hover:bg-orange-100 cursor-pointer">Help</li>
-          </ul>
+          {navItem("Crop Converter")}
+          <div className="absolute left-0 mt-2 w-44 bg-white shadow-md rounded-md hidden group-hover:block overflow-hidden">
+            {[
+              "Soil Testing",
+              "Crop Assessment",
+              "Buy",
+              "Help",
+              "Calculate Price"
+            ].map((item, i) => (
+              <p
+                key={i}
+                className="px-4 py-2 hover:bg-orange-100 transition"
+                onClick={() => {
+                  if (item === "Calculate Price") navigate("/crop_converter")
+                }}
+              >
+                {item}
+              </p>
+            ))}
+          </div>
         </div>
 
-        <span className="hover:text-orange-400 cursor-pointer transition-colors group" onClick={() => navigate("/market")}>
-                    <hr className='w-full h-1 bg-white outline-none border-0 group-hover:block group-hover:bg-orange-500 rounded-lg duration-200' />
+        {navItem("Market", "/market")}
+        {navItem("About Us", "/about")}
 
-          Market
-        </span>
-
-        <span className="hover:text-orange-400 cursor-pointer transition-colors group" onClick={() => navigate("/about")}>
-                    <hr className='w-full h-1 bg-white outline-none border-0 group-hover:block group-hover:bg-orange-500 rounded-lg duration-200' />
-
-          About Us
-        </span>
-
-        {!isloggedin && (
-          <span
-            className="hover:text-orange-400 cursor-pointer transition-colors group"
-            onClick={() => navigate("/login")}
-          >
-                      <hr className='w-full h-1 bg-white outline-none border-0 group-hover:block group-hover:bg-orange-500 rounded-lg duration-200' />
-
-            Login
-          </span>
-        )}
+        {!isloggedin && navItem("Login", "/login")}
 
         <span
-          className="hover:text-orange-400 cursor-pointer transition-colors group" 
-          onClick={() => navigate("/list-sell")}
+          onClick={() => {
+            isloggedin ? navigate("/layout") : navigate("/login")
+          }}
+          className="relative cursor-pointer group"
         >
-                    <hr className='w-full h-1 bg-white outline-none border-0 group-hover:block group-hover:bg-orange-500 rounded-lg duration-200' />
-
           List & Sell
+          <span className="absolute left-0 bottom-[-2px] w-0 h-[2px] bg-green-500 transition-all duration-300 group-hover:w-full"></span>
         </span>
 
+        {/* PROFILE */}
         {isloggedin && (
-          <span className="hover:text-orange-400 cursor-pointer transition-colors relative group h-full group">
-                      <hr className='w-full h-1 bg-white outline-none border-0 group-hover:block group-hover:bg-orange-500 rounded-lg duration-200' />
-
-            Profile
-            <span
-              className="text-sm text-black bg-white px-2 py-1 rounded-sm absolute top-8 hidden group-hover:block "
-              onClick={() => setisloggedin(false)}
-            >
-                        <hr className='w-full h-1 bg-white outline-none border-0 group-hover:block group-hover:bg-orange-500 rounded-lg duration-200' />
-
-              Logout
-            </span>
-          </span>
+          <div className="relative group cursor-pointer">
+            {navItem("Profile")}
+            <div className="absolute right-0 mt-2 w-28 bg-white shadow-md rounded-md hidden group-hover:block">
+              <p
+                onClick={() => setisloggedin(false)}
+                className="px-4 py-2 hover:bg-red-100 hover:text-red-600 transition text-center"
+              >
+                Logout
+              </p>
+            </div>
+          </div>
         )}
+
       </div>
 
-      {/* Hamburger Icon (Mobile) */}
-      <div className='h-full flex-1 flex justify-end sm:hidden flex justify-center items-center'>
-        <img 
-          className='h-[60%] object-contain cursor-pointer h-[ 30px] w-[30px] object-contain'  
+      {/* MOBILE MENU ICON */}
+      <div className="sm:hidden flex items-center">
+        <img
           onClick={() => setismenu(true)}
-          src={assets.menu} 
-          alt="menu" 
+          src={assets.menu}
+          className="w-8 h-8 cursor-pointer"
         />
       </div>
 
-      {/* Sidebar for Small Screens */}
+      {/* MOBILE SIDEBAR */}
       <div
-        className={`fixed top-0 right-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 h-[100vh] w-[70vw] text-white shadow-2xl transform transition-transform duration-500 ease-in-out z-50
-        ${ismenu ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed top-0 right-0 w-[65vw] h-screen bg-gray-900 text-white transform transition-transform duration-300 ${
+          ismenu ? "translate-x-0" : "translate-x-full"
+        }`}
       >
-        {/* Close Button */}
-        <span
-          className="absolute top-4 right-4 text-white bg-red-600 px-3 py-1 rounded-lg cursor-pointer hover:bg-red-700 transition"
+        <button
+          className="absolute top-4 right-4 bg-red-500 px-3 py-1 rounded"
           onClick={() => setismenu(false)}
         >
           ✕
-        </span>
+        </button>
 
-        {/* Sidebar Links */}
-        <div className="flex flex-col gap-6 text-lg font-medium mt-16 px-8">
-          <span onClick={() => { navigate("/"); setismenu(false); }} className="hover:text-orange-400 cursor-pointer">Home</span>
-          <span onClick={() => { navigate("/market"); setismenu(false); }} className="hover:text-orange-400 cursor-pointer">Market</span>
-          <span onClick={() => { navigate("/about"); setismenu(false); }} className="hover:text-orange-400 cursor-pointer">About Us</span>
-          <span onClick={() => { navigate("/list-sell"); setismenu(false); }} className="hover:text-orange-400 cursor-pointer">List & Sell</span>
+        <div className="flex flex-col gap-6 mt-20 text-lg px-6">
+          {navItem("Home", "/", () => { navigate("/"); setismenu(false) })}
+          {navItem("Market", "/market", () => { navigate("/market"); setismenu(false) })}
+          {navItem("About Us", "/about", () => { navigate("/about"); setismenu(false) })}
+          {navItem("List & Sell", null, () => { isloggedin ? navigate("/layout") : navigate("/login"); setismenu(false) })}
 
-          {!isloggedin ? (
-            <span onClick={() => { navigate("/login"); setismenu(false); }} className="hover:text-orange-400 cursor-pointer">Login</span>
-          ) : (
-            <span onClick={() => { setisloggedin(false); setismenu(false); }} className="hover:text-orange-400 cursor-pointer">Logout</span>
-          )}
+          {!isloggedin
+            ? navItem("Login", "/login", () => { navigate("/login"); setismenu(false) })
+            : navItem("Logout", null, () => { setisloggedin(false); setismenu(false) })}
         </div>
       </div>
-    </div>
+    </nav>
   )
 }
 
