@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
-import { assets } from '../assets/assets'
-import { useappcontaxt } from '../context/Appcontext'
+import React, { useState } from 'react';
+import { assets } from '../assets/assets';
+import { useappcontaxt } from '../context/Appcontext';
+
+// Clerk imports
+import { UserButton, SignedIn, SignedOut, useUser } from "@clerk/clerk-react";
 
 const Navbar = () => {
   const [ismenu, setismenu] = useState(false);
-  const { navigate, isloggedin, setisloggedin } = useappcontaxt();
+  const { navigate } = useappcontaxt();
+  const { user, isSignedIn } = useUser();   // Clerk auth status
 
   const navItem = (label, path, action) => (
     <span
@@ -33,18 +37,12 @@ const Navbar = () => {
         <div className="relative group cursor-pointer">
           {navItem("Crop Converter")}
           <div className="absolute left-0 mt-2 w-44 bg-white shadow-md rounded-md hidden group-hover:block overflow-hidden">
-            {[
-              "Soil Testing",
-              "Crop Assessment",
-              "Buy",
-              "Help",
-              "Calculate Price"
-            ].map((item, i) => (
+            {["Soil Testing", "Crop Assessment", "Buy", "Help", "Calculate Price"].map((item, i) => (
               <p
                 key={i}
                 className="px-4 py-2 hover:bg-orange-100 transition"
                 onClick={() => {
-                  if (item === "Calculate Price") navigate("/crop_converter")
+                  if (item === "Calculate Price") navigate("/crop_converter");
                 }}
               >
                 {item}
@@ -56,33 +54,33 @@ const Navbar = () => {
         {navItem("Market", "/market")}
         {navItem("About Us", "/about")}
 
-        {!isloggedin && navItem("Login", "/login")}
+        {/* Show Login if NOT signed in */}
+        <SignedOut>
+          {navItem("Login", "/login")}
+        </SignedOut>
 
+        {/* List and Sell */}
         <span
           onClick={() => {
-            isloggedin ? navigate("/layout") : navigate("/login")
+            isSignedIn ? navigate("/layout") : navigate("/login");
           }}
           className="relative cursor-pointer group"
         >
-          List & Sell
+          List & Sell  
           <span className="absolute left-0 bottom-[-2px] w-0 h-[2px] bg-green-500 transition-all duration-300 group-hover:w-full"></span>
         </span>
 
-        {/* PROFILE */}
-        {isloggedin && (
-          <div className="relative group cursor-pointer">
-            {navItem("Profile")}
-            <div className="absolute right-0 mt-2 w-28 bg-white shadow-md rounded-md hidden group-hover:block">
-              <p
-                onClick={() => setisloggedin(false)}
-                className="px-4 py-2 hover:bg-red-100 hover:text-red-600 transition text-center"
-              >
-                Logout
-              </p>
-            </div>
-          </div>
-        )}
-
+        {/* PROFILE (Clerk UserButton) */}
+        <SignedIn>
+          <UserButton 
+            afterSignOutUrl="/" 
+            appearance={{
+              elements: {
+                avatarBox: "w-10 h-10"
+              }
+            }}
+          />
+        </SignedIn>
       </div>
 
       {/* MOBILE MENU ICON */}
@@ -111,15 +109,25 @@ const Navbar = () => {
           {navItem("Home", "/", () => { navigate("/"); setismenu(false) })}
           {navItem("Market", "/market", () => { navigate("/market"); setismenu(false) })}
           {navItem("About Us", "/about", () => { navigate("/about"); setismenu(false) })}
-          {navItem("List & Sell", null, () => { isloggedin ? navigate("/layout") : navigate("/login"); setismenu(false) })}
 
-          {!isloggedin
-            ? navItem("Login", "/login", () => { navigate("/login"); setismenu(false) })
-            : navItem("Logout", null, () => { setisloggedin(false); setismenu(false) })}
+          {/* List & Sell */}
+          {navItem("List & Sell", null, () => {
+            isSignedIn ? navigate("/layout") : navigate("/login");
+            setismenu(false);
+          })}
+
+          {/* MOBILE LOGIN/LOGOUT */}
+          <SignedOut>
+            {navItem("Login", "/login", () => { navigate("/login"); setismenu(false) })}
+          </SignedOut>
+
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
