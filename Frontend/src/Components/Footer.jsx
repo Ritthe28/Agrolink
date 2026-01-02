@@ -13,8 +13,14 @@ import {
 const Footer = () => {
   return (
     <footer className="px-6 md:px-16 lg:px-36 mt-20 w-full bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 text-gray-300">
-      <div className="flex flex-col md:flex-row justify-between w-full gap-10 border-b border-gray-600 pb-14 pt-14">
-        <div className="md:max-w-96">
+      <div className="flex flex-col md:flex-row justify-between w-full gap-10 border-b border-gray-600 pb-14 pt-14 ">
+
+
+
+
+
+
+        <div className="md:max-w-96 ">
           <img alt="" className="h-11" src={assets.Agrologo} />
           <p className="mt-6 text-sm">
             🚜 AgroLink bridges the gap between farmers and markets for better

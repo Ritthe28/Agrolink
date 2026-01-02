@@ -1,24 +1,17 @@
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { BrowserRouter } from 'react-router-dom'
-import Appcontextprovider from './context/Appcontext.jsx'
-import {ClerkProvider} from '@clerk/clerk-react'
+// main.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.jsx";
+import "./index.css";
+import { Appcontextprovider } from "./context/Appcontext.jsx";
 
-
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
-if (!PUBLISHABLE_KEY) {
-  throw new Error('Add your Clerk Publishable Key to the .env file')
-}
-
-createRoot(document.getElementById('root')).render(
-<ClerkProvider  publishableKey={PUBLISHABLE_KEY}>
-
-  <BrowserRouter>
-<Appcontextprovider>
-  <App/>
-</Appcontextprovider>
-  </BrowserRouter>
-</ClerkProvider>
-)
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Appcontextprovider>
+        <App />
+      </Appcontextprovider>
+    </BrowserRouter>
+  </React.StrictMode>
+);

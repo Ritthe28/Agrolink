@@ -1,12 +1,9 @@
-import {v2 as cloudnary} from "cloudinary"
-const connectcloudnary = ()=>{
-    cloudnary.config({
-        cloud_name: "dcavwldby",
-        api_key: "114882897675839",
-        api_secret: "tkLVH2zcdwaFsMxXR8NsTirnxos"
+import {v2 as cloudinary} from "cloudinary"
+    cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
     })
-    console.log("cloudnary connected successfully");
-    
-}
+   
 
-export default connectcloudnary;
+export default cloudinary;

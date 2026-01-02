@@ -1,17 +1,47 @@
 import mongoose from "mongoose";
-// import isEmail from "validator/lib/isEmail";
 
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true
+    },
 
-const userschema= new mongoose.Schema({
-    email :{type:String, required:true, unique:true},
-         fullname :{type :String , required:true},
-         password :{type:String, required:true, minlength:6},
-         profilepic :{type:String, default:"" },
-         bio :{type:String  },
-},
-{
-    timestamps:true
-}
-)
-const user = mongoose.model("user",userschema);
-export default user;
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true
+    },
+
+    phone: {
+      type: String,
+      required: true
+    },
+
+    password: {
+      type: String,
+      required: true
+    },
+
+    role: {
+      type: String,
+      enum: ["farmer", "consumer", "seller", "delivery", "admin"],
+      required: true
+    },
+
+    isVerified: {
+      type: Boolean,
+      default: false
+    },
+
+    isActive: {
+      type: Boolean,
+      default: true
+    }
+  },
+  { timestamps: true }
+);
+
+export default mongoose.model("User", userSchema);
