@@ -43,11 +43,11 @@ app.use("/api/delivery",router);
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
-  console.log({
-         cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-  });
+  // console.log({
+  //        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  // api_key: process.env.CLOUDINARY_API_KEY,
+  // api_secret: process.env.CLOUDINARY_API_SECRET
+  // });
   
   console.log(`Server running on port ${PORT}`);
 });

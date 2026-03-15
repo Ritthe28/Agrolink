@@ -13,8 +13,6 @@ import { isDelivery } from "../Middleware/roleMiddleware.js";
 import { updateDeliveryStatus } from "../Controllers/deliveryController.js";
 
 
-
-
 const router = express.Router();
 
 router.get("/orders", protect, isDelivery, getAvailableOrders);
